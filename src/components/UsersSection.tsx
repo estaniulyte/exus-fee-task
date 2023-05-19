@@ -43,6 +43,17 @@ function UsersSection() {
         console.log(err)
       });
   }
+
+  const onEditUser = (user: UserType, id: number) => {
+    User.updateUser(user, id)
+      .then((data) => {
+        const newUsers = [...users]
+        const index = users.findIndex((user) => user.id === id)
+        newUsers[index] = data
+        setUsers(newUsers)
+      })
+      .catch((err) => {
+        console.log(err)
       });
   }
 
@@ -109,14 +120,14 @@ function UsersSection() {
             <select required value={organizationId} id="organizationId" className='select-input' onChange={handleOrganizationIdChange}>
               {organizations?.map((item) => {
                 return (
-                <option key={item.id} value={item.id}>{item.name} + {item.id}</option>
+                <option key={item.id} value={item.id}>{item.name} (ID: {item.id})</option>
                 )
               })}
             </select>
             <button type='submit' className='btn btn-sm md:btn-md lg:btn-lg btn-primary' disabled={!validate()}>submit</button>
         </form>
       </div>
-      {users.length && <UserTable head={['ID', 'Name', 'Email', 'Organization ID']} body={users} handleDeleteUser={onDeleteUser} /> }
+      {users.length && <UserTable head={['ID', 'Name', 'Email', 'Organization ID']} body={users} handleDeleteUser={onDeleteUser} handleEditUser={onEditUser} organizations={organizations} handleEditFormUser={onEditUser}/> }
       </div>
     </section>
   )
