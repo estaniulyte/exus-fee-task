@@ -12,19 +12,19 @@
     @apply text-neutral-500;
   }
   .h1 {
-    @apply text-[40px] leading-[40px] lg:text-[60px] lg:leading-[62px] font-extrabold;
+    @apply text-[40px] leading-[40px] lg:text-[60px] lg:leading-[62px] font-bold;
   }
   .h2 {
-    @apply text-[32px] leading-[40px] lg:text-[50px] lg:leading-[50px] font-extrabold;
+    @apply text-[32px] leading-[40px] lg:text-[50px] lg:leading-[50px] font-bold;
   }
   .h3 {
-    @apply text-[38px] leading-[46px] font-extrabold;
+    @apply text-[38px] leading-[46px] font-bold;
   }
   .h4 {
-    @apply text-[30px] leading-[46px] font-extrabold;
+    @apply text-[30px] leading-[46px] font-bold;
   }
   .h5 {
-    @apply text-[24px] leading-[32px] font-extrabold;
+    @apply text-[24px] leading-[32px] font-bold;
   }
   .h6 {
     @apply text-[18px] leading-[28px] font-bold;
