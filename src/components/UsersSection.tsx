@@ -13,8 +13,6 @@ import UserTable from './UserTable'
 function UsersSection() {
   const [users, setUsers] = useState<UserType[]>([]);
   const [organizations, setOrganizations] = useState<OrganizationType[]>([]);
-  const [isError, setIsError] = useState<boolean>(false);
-
 
   const [name, setName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
@@ -42,7 +40,9 @@ function UsersSection() {
           prevUsers.filter(item => item.id !== id)
       )})
       .catch((err) => {
-        setIsError(true);
+        console.log(err)
+      });
+  }
       });
   }
 
@@ -60,6 +60,9 @@ function UsersSection() {
         setUsers((previousUsers) => [...previousUsers, data])
         clearForm()
       })
+      .catch((err) => {
+        console.log(err)
+      });
   }
 
   const clearForm = () => {
@@ -78,7 +81,7 @@ function UsersSection() {
       setUsers(data);
     })
     .catch((err) => {
-      setIsError(true);
+      console.log(err)
     });
 
     Organization.getOrganizations()
@@ -87,7 +90,7 @@ function UsersSection() {
         setOrganizationId(data[0].id)
 			})
 			.catch((err) => {
-				setIsError(true);
+        console.log(err)
 			});
     return () => {};
 	}, []);
