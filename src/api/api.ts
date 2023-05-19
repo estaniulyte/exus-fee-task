@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 
 import { ProjectType } from '../models/project.interface';
 import { UserType } from '../models/user.interface';
+import { NewUserType } from '../models/newUser.interface';
 import { OrganizationType } from '../models/organization.interface';
 
 const instance = axios.create({
@@ -31,7 +32,7 @@ export const Project = {
 export const User = {
 	getUsers: (): Promise<UserType[]> => requests.get('users'),
 	getAUser: (id: number): Promise<UserType> => requests.get(`users/${id}`),
-	createUser: (user: UserType): Promise<UserType> =>
+	createUser: (user: NewUserType): Promise<UserType> =>
 		requests.post('users', user),
 	updateUser: (user: UserType, id: number): Promise<UserType> =>
 		requests.put(`users/${id}`, user),
