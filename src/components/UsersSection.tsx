@@ -23,6 +23,17 @@ function UsersSection() {
 
   const [formData, setFormData] = useState(defaultFormData)
 
+  const onDeleteUser = (id: number | undefined) => {
+    User.deleteUser(id)
+      .then((data) => {
+        setUsers((prevUsers) =>
+          prevUsers.filter(item => item.id !== id)
+      )})
+      .catch((err) => {
+        setIsError(true);
+      });
+  }
+
   useEffect(() => {
     User.getUsers()
     .then((data) => {
@@ -65,6 +76,7 @@ function UsersSection() {
             <button type='submit' className='btn btn-sm md:btn-md lg:btn-lg btn-primary' disabled={!validate()}>submit</button>
         </form>
       </div>
+      <Table head={['ID', 'Name', 'Email', 'Organization ID']} body={users} handleDeleteUser={onDeleteUser} />
       </div>
     </section>
   )

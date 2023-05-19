@@ -3,16 +3,17 @@ import { UserType } from '../models/user.interface';
 type TableProps = {
   head: Array<string>;
   body: UserType[];
+  handleDeleteUser: (id: number | undefined) => void;
 }
 
-function Table( props: TableProps) {
+function Table({ head, body, handleDeleteUser }: TableProps) {
   return (
     <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-2 md:m-4 overflow-x-auto">
       <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
         <thead className="bg-gray-50">
           <tr>
             {
-              props.head?.map((item, idx) => {
+              head?.map((item, idx) => {
                 return (
                   <th
                     className="px-6 py-4 font-medium text-gray-900"
@@ -28,7 +29,7 @@ function Table( props: TableProps) {
         </thead>
         <tbody className="divide-y divide-gray-100 border-t border-gray-100">
             {
-              props.body?.map((item) => {
+              body.map((item) => {
                 return (
                   <tr className="hover:bg-gray-50" key={item.id}>
                     <td className="px-6 py-4 text-gray-700">
@@ -45,7 +46,11 @@ function Table( props: TableProps) {
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex justify-end gap-4">
-                        <a x-data="{ tooltip: 'Delete' }" href="#">
+                        <button
+                          onClick={e => handleDeleteUser(item.id)}
+                          className='btn text-red-400'
+                          data-tooltip-target="tooltip-default"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
