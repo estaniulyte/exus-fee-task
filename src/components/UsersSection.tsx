@@ -20,12 +20,12 @@ function UsersSection() {
   const [email, setEmail] = useState<string>("")
   const [organizationId, setOrganizationId] = useState<number>(organizations[0]?.id!)
 
-  const handleNameChange = (event: any) => {
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setName(event.target.value)
   }
 
-  const handleEmailChange = (event: any) => {
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setEmail(event.target.value)
   }
