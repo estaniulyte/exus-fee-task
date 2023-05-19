@@ -8,22 +8,35 @@ import { OrganizationType } from '../models/organization.interface';
 import { User } from '../api/api';
 import { Organization } from '../api/api';
 
-import Table from './Table'
-
-const defaultFormData = {
-  name: '',
-  email: '',
-  organizationId: -1
-}
+import UserTable from './UserTable'
 
 function UsersSection() {
   const [users, setUsers] = useState<UserType[]>([]);
   const [organizations, setOrganizations] = useState<OrganizationType[]>([]);
   const [isError, setIsError] = useState<boolean>(false);
 
-  const [formData, setFormData] = useState(defaultFormData)
 
-  const onDeleteUser = (id: number | undefined) => {
+  const [name, setName] = useState<string>("")
+  const [email, setEmail] = useState<string>("")
+  const [organizationId, setOrganizationId] = useState<number>(organizations[0]?.id!)
+
+
+  const handleNameChange = (event: any) => {
+    event.preventDefault();
+    setName(event.target.value)
+  }
+
+  const handleEmailChange = (event: any) => {
+    event.preventDefault();
+    setEmail(event.target.value)
+  }
+
+  const handleOrganizationIdChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    event.preventDefault();
+    setOrganizationId(+event.target.value) 
+  }
+
+  const onDeleteUser = (id: number) => {
     User.deleteUser(id)
       .then((data) => {
         setUsers((prevUsers) =>
@@ -34,11 +47,36 @@ function UsersSection() {
       });
   }
 
+  const onSubmit = (event: React.FormEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
+    const newUser = {
+      name,
+      email,
+      organizationId
+    }
+
+    User.createUser(newUser)
+      .then((data) => {
+        setUsers((previousUsers) => [...previousUsers, data])
+        clearForm()
+      })
+  }
+
+  const clearForm = () => {
+    setOrganizationId(organizations[0].id)
+    setName("")
+    setEmail("")
+  }
+
+  const validate = () => {
+    return name.length && email.length && organizationId !== -1;
+  };
+
   useEffect(() => {
     User.getUsers()
     .then((data) => {
       setUsers(data);
-      console.log(data)
     })
     .catch((err) => {
       setIsError(true);
@@ -47,7 +85,7 @@ function UsersSection() {
     Organization.getOrganizations()
 			.then((data) => {
 				setOrganizations(data);
-        // console.log(data)
+        setOrganizationId(data[0].id)
 			})
 			.catch((err) => {
 				setIsError(true);
@@ -64,12 +102,12 @@ function UsersSection() {
       </div>
       <div className='form' onSubmit={onSubmit}>
         <form className='w-full flex gap-x-2 p-5'>
-            <input required type='text' name="name" placeholder='Enter a name' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' onChange={handleAddFormChange} />
-            <input type='text' name="email" placeholder='Enter an email' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' onChange={handleAddFormChange} />
-            <select id="organizationId" className='block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' onChange={handleAddFormChange1}>
-              { organizations?.map((item) => {
+            <input required value={name} type='text' name="name" placeholder='Enter a name' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' onChange={handleNameChange} />
+            <input required value={email} type='text' name="email" placeholder='Enter an email' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' onChange={handleEmailChange} />
+            <select required value={organizationId} id="organizationId" className='block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' onChange={handleOrganizationIdChange}>
+              {organizations?.map((item) => {
                 return (
-                <option value={item.id}>{item.name} + {item.id}</option>
+                <option key={item.id} value={item.id}>{item.name} + {item.id}</option>
                 )
               })}
             </select>
