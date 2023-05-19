@@ -50,6 +50,12 @@
   .btn-sm {
     @apply font-bold uppercase text-[12px] leading-[18px] h-[42px] px-[30px] tracking-[1px];
   }
+  .btn-xs-sm {
+    @apply font-bold text-[12px] leading-[18px] h-[42px] px-[18px] tracking-[1px];
+  }
+  .btn-cancel {
+    @apply text-red-500 hover:text-red-500/80
+  }
   .btn-lg {
     @apply font-bold uppercase text-[14px] leading-[18px] h-[46px] px-[40px] tracking-[1px];
   }
