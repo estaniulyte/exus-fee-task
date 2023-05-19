@@ -101,9 +101,9 @@ function UsersSection() {
       </div>
       <div className='form' onSubmit={onSubmit}>
         <form className='w-full flex gap-x-2 p-5'>
-            <input required value={name} type='text' name="name" placeholder='Enter a name' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' onChange={handleNameChange} />
-            <input required value={email} type='text' name="email" placeholder='Enter an email' className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' onChange={handleEmailChange} />
-            <select required value={organizationId} id="organizationId" className='block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' onChange={handleOrganizationIdChange}>
+            <input required value={name} type='text' name="name" placeholder='Enter a name' className='text-input' onChange={handleNameChange} />
+            <input required value={email} type='email' name="email" placeholder='Enter an email' className='text-input' onChange={handleEmailChange} />
+            <select required value={organizationId} id="organizationId" className='select-input' onChange={handleOrganizationIdChange}>
               {organizations?.map((item) => {
                 return (
                 <option key={item.id} value={item.id}>{item.name} + {item.id}</option>
