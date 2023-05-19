@@ -20,7 +20,6 @@ function UsersSection() {
   const [email, setEmail] = useState<string>("")
   const [organizationId, setOrganizationId] = useState<number>(organizations[0]?.id!)
 
-
   const handleNameChange = (event: any) => {
     event.preventDefault();
     setName(event.target.value)
@@ -114,7 +113,7 @@ function UsersSection() {
             <button type='submit' className='btn btn-sm md:btn-md lg:btn-lg btn-primary' disabled={!validate()}>submit</button>
         </form>
       </div>
-      <Table head={['ID', 'Name', 'Email', 'Organization ID']} body={users} handleDeleteUser={onDeleteUser} />
+      {users.length && <UserTable head={['ID', 'Name', 'Email', 'Organization ID']} body={users} handleDeleteUser={onDeleteUser} /> }
       </div>
     </section>
   )
