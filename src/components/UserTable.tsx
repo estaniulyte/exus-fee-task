@@ -5,6 +5,8 @@ import EditableRow from './EditableRow';
 
 import ReadOnlyRow from './ReadOnlyRow';
 
+import React from 'react';
+
 type TableProps = {
   head: Array<string>;
   body: UserType[];
@@ -20,6 +22,7 @@ function Table({ head, body, organizations, handleDeleteUser, handleEditFormUser
   const [editName, setEditName] = useState<string>("")
   const [editEmail, setEditEmail] = useState<string>("")
   const [editOrganizationId, setEditOrganizationId] = useState<number>(-1)
+
 
   const handleEditNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -68,54 +71,105 @@ function Table({ head, body, organizations, handleDeleteUser, handleEditFormUser
     setEditUserId(null)
   }
 
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1)
+  const recordsPerPage = 5;
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage; // first index on next page
+  const records = body.slice(firstIndex, lastIndex);
+  const pageCount = Math.ceil(body.length / recordsPerPage)
+  const indexes = pageCount + 1
+  const numbers = Array.from(Array(indexes).keys()).slice(1)
+  
+  const nextPage = () => {
+    if (currentPage !== lastIndex){
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
+  const previousPage = () => {
+    if(currentPage !== firstIndex) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
+  const changePage = (number: number) => {
+    setCurrentPage(number)
+  }
+
+  const validatePrevBtn = () => {
+    return currentPage === 1;
+  };
+
+  const validateNextBtn = () => {
+    return currentPage === pageCount;
+  };
+
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-2 md:m-4 overflow-x-auto">
-      <form>
-        <table className="w-full table-fixed border-collapse bg-white text-left text-sm text-gray-500">
-          <thead className="bg-gray-50">
-            <tr>
-              {
-                head?.map((item, idx) => {
-                  return (
-                    <th
-                      className="px-6 py-4 font-medium text-gray-900"
-                      key={idx}
-                    >
-                      { item }
-                    </th>
-                  )
-                })
-              }
-              <th className="px-6 py-4 font-medium text-gray-900"></th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-              {
-                body.map((item) => {
-                  return (
-                    <Fragment key={item.id}>
-                      { editUserId === item.id ? 
-                          <EditableRow
-                            item={item}
-                            organizations={organizations}
-                            editName={editName}
-                            editEmail={editEmail}
-                            editOrganizationId={editOrganizationId}
-                            handleEditNameChange={handleEditNameChange}
-                            handleEditEmailChange={handleEditEmailChange}
-                            handleEditOrganizationIdChange={handleEditOrganizationIdChange}
-                            handleEditFormChange={handleEditFormChange}
-                            handleCancelClick={handleCancelClick}
-                          />
-                        :
-                          <ReadOnlyRow item={item} handleEditClick={handleEditClick} handleDeleteUser={handleDeleteClickThis} /> }
-                    </Fragment>
-                  )
-                })
-              }
-          </tbody>
-        </table>
-      </form>
+    <div>
+      <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-2 md:m-4 overflow-x-auto">
+        <form>
+          <table className="w-full md:table-fixed border-collapse bg-white text-left text-sm text-gray-500">
+            <thead className="bg-gray-50">
+              <tr>
+                {
+                  head?.map((item, idx) => {
+                    return (
+                      <th
+                        className="px-6 py-4 font-medium text-gray-900"
+                        key={idx}
+                      >
+                        { item }
+                      </th>
+                    )
+                  })
+                }
+                <th className="px-6 py-4 font-medium text-gray-900"></th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100 border-t border-gray-100">
+                {
+                  records.map((item) => {
+                    return (
+                      <Fragment key={item.id}>
+                        { editUserId === item.id ? 
+                            <EditableRow
+                              item={item}
+                              organizations={organizations}
+                              editName={editName}
+                              editEmail={editEmail}
+                              editOrganizationId={editOrganizationId}
+                              handleEditNameChange={handleEditNameChange}
+                              handleEditEmailChange={handleEditEmailChange}
+                              handleEditOrganizationIdChange={handleEditOrganizationIdChange}
+                              handleEditFormChange={handleEditFormChange}
+                              handleCancelClick={handleCancelClick}
+                            />
+                          :
+                            <ReadOnlyRow item={item} handleEditClick={handleEditClick} handleDeleteUser={handleDeleteClickThis} /> }
+                      </Fragment>
+                    )
+                  })
+                }
+            </tbody>
+          </table>
+        </form>
+      </div>
+      <nav className="flex justify-end mx-2 md:mx-4">
+        <ul className="flex gap-x-1">
+          <button className="btn btn-page rounded-l" onClick={previousPage} disabled={validatePrevBtn()}>Previous</button>
+            {
+              numbers.map((number, index) => {
+                return (
+                  <li >
+                    <button key={index} className={`btn-page ${currentPage === number ? "bg-primary-200 text-white" : ""}`} onClick={() => changePage(number)}>{number}</button>
+                  </li>
+                )
+              })
+            }
+            <button className="btn btn-page rounded-r" onClick={nextPage} disabled={validateNextBtn()}>Next</button>
+          </ul>
+      </nav>
     </div>
   )
 }
