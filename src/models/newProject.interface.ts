@@ -1,6 +1,5 @@
-export interface ProjectType {
+export interface NewProjectType {
   name: string;
   acronym: string;
   description: string;
-  id: number;
 }

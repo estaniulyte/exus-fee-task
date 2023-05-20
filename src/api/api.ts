@@ -1,9 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
 
 import { ProjectType } from '../models/project.interface';
+import { NewProjectType } from '../models/newProject.interface';
 import { UserType } from '../models/user.interface';
 import { NewUserType } from '../models/newUser.interface';
 import { OrganizationType } from '../models/organization.interface';
+import { NewOrganizationType } from '../models/newOrganization.interface';
 
 const instance = axios.create({
   baseURL: 'https://assignments-ailabs.exus.ai/',
@@ -22,7 +24,7 @@ const requests = {
 export const Project = {
 	getProjects: (): Promise<ProjectType[]> => requests.get('projects'),
 	getAProject: (id: number): Promise<ProjectType> => requests.get(`projects/${id}`),
-	createProject: (project: ProjectType): Promise<ProjectType> =>
+	createProject: (project: NewProjectType): Promise<ProjectType> =>
 		requests.post('projects', project),
 	updateProject: (project: ProjectType, id: number): Promise<ProjectType> =>
 		requests.put(`projects/${id}`, project),
@@ -42,7 +44,7 @@ export const User = {
 export const Organization = {
 	getOrganizations: (): Promise<OrganizationType[]> => requests.get('organizations'),
 	getAOrganization: (id: number): Promise<OrganizationType> => requests.get(`organizations/${id}`),
-	createOrganization: (organization: OrganizationType): Promise<OrganizationType> =>
+	createOrganization: (organization: NewOrganizationType): Promise<OrganizationType> =>
 		requests.post('organizations', organization),
 	updateOrganization: (organization: OrganizationType, id: number): Promise<OrganizationType> =>
 		requests.put(`organizations/${id}`, organization),
