@@ -8,7 +8,7 @@ import { OrganizationType } from '../models/organization.interface';
 import { User } from '../api/api';
 import { Organization } from '../api/api';
 
-import UserTable from './UserTable'
+import UserTable from './userSectionComponents/UserTable'
 
 function UsersSection() {
   const [users, setUsers] = useState<UserType[]>([]);
@@ -90,6 +90,7 @@ function UsersSection() {
     User.getUsers()
     .then((data) => {
       setUsers(data);
+      console.log(data)
     })
     .catch((err) => {
       console.log(err)
@@ -110,7 +111,7 @@ function UsersSection() {
     <section className=''>
       <div className='mx-auto px-[0px] lg:px-[5px]'>
       <div className='flex items-center justify-between mx-2 md:mx-4'>
-        <h2 className='h4 md:h3 section-title'>Users</h2>
+        <h2 className='h2 section-title'>Users</h2>
         <button className='btn btn-primary btn-sm md:btn-md lg:btn-lg'>New User</button>
       </div>
       <div className='form' onSubmit={onSubmit}>

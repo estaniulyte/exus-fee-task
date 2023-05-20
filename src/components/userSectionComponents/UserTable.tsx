@@ -1,6 +1,6 @@
 import { useState, Fragment } from 'react';
 
-import { UserType } from '../models/user.interface';
+import { UserType } from '../../models/user.interface';
 import EditableRow from './EditableRow';
 
 import ReadOnlyRow from './ReadOnlyRow';
@@ -16,7 +16,7 @@ type TableProps = {
   handleEditFormUser: (user: UserType, id: number) => void
 }
 
-function Table({ head, body, organizations, handleDeleteUser, handleEditFormUser}: TableProps) {
+function UserTable({ head, body, organizations, handleDeleteUser, handleEditFormUser}: TableProps) {
   const [editUserId, setEditUserId] = useState(null);
 
   const [editName, setEditName] = useState<string>("")
@@ -161,7 +161,7 @@ function Table({ head, body, organizations, handleDeleteUser, handleEditFormUser
             {
               numbers.map((number, index) => {
                 return (
-                  <li >
+                  <li key={index}>
                     <button key={index} className={`btn-page ${currentPage === number ? "bg-primary-200 text-white" : ""}`} onClick={() => changePage(number)}>{number}</button>
                   </li>
                 )
@@ -174,4 +174,4 @@ function Table({ head, body, organizations, handleDeleteUser, handleEditFormUser
   )
 }
 
-export default Table;
+export default UserTable;
