@@ -117,7 +117,7 @@ function OrganizationsTable({ head, body, projects, handleDeleteOrganization, ha
     <div>
       <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-2 md:m-4 overflow-x-auto">
         <form>
-          <table className="w-full md:table-fixed border-collapse bg-white text-left text-sm text-gray-500">
+          <table className="section-table">
             <thead className="bg-gray-50">
               <tr>
                 {
