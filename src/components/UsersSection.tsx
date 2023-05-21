@@ -9,6 +9,7 @@ import { User } from '../api/api';
 import { Organization } from '../api/api';
 
 import UserTable from './userSectionComponents/UserTable'
+import LabeledInput from './LabeledInput';
 
 function UsersSection() {
   const [users, setUsers] = useState<UserType[]>([]);
@@ -109,14 +110,18 @@ function UsersSection() {
   return (
     <section className=''>
       <div className='mx-auto px-[0px] lg:px-[5px]'>
-      <div className='flex items-center justify-between mx-2 md:mx-4'>
+      <div className='flex items-center mx-2 md:mx-4'>
         <h2 className='h2 section-title'>Users</h2>
-        <button className='btn btn-primary btn-sm md:btn-md lg:btn-lg'>New User</button>
       </div>
       <div className='form' onSubmit={onSubmit}>
-        <form className='w-full flex gap-x-2 p-5'>
-            <input required value={name} type='text' name="name" placeholder='Enter a name' className='text-input' onChange={handleNameChange} />
-            <input required value={email} type='email' name="email" placeholder='Enter an email' className='text-input' onChange={handleEmailChange} />
+        <form className='section-form'>
+          <LabeledInput labelText='Name'>
+            <input required value={name} type='text' name="name" placeholder='Jonas' className='text-input' onChange={handleNameChange} />
+          </LabeledInput>
+          <LabeledInput labelText='Email'>
+            <input required value={email} type='email' name="email" placeholder='jonas@gmail.com' className='text-input' onChange={handleEmailChange} />
+          </LabeledInput>
+          <LabeledInput labelText='Organization'>
             <select required value={organizationId} id="organizationId" className='select-input' onChange={handleOrganizationIdChange}>
               {organizations?.map((item) => {
                 return (
@@ -124,7 +129,8 @@ function UsersSection() {
                 )
               })}
             </select>
-            <button type='submit' className='btn btn-sm md:btn-md lg:btn-lg btn-primary' disabled={!validate()}>submit</button>
+          </LabeledInput>
+          <button type='submit' className='btn btn-primary btn-lg self-end' disabled={!validate()}>Create User</button>
         </form>
       </div>
       {users.length && <UserTable head={['ID', 'Name', 'Email', 'Organization ID']} body={users} handleDeleteUser={onDeleteUser} handleEditUser={onEditUser} organizations={organizations} handleEditFormUser={onEditUser}/> }

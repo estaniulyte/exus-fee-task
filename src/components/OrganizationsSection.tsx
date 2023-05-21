@@ -9,6 +9,7 @@ import { Project } from '../api/api';
 import { Organization } from '../api/api';
 
 import OrganizationsTable from './organizationsSectionComponents/OrganizationsTable'
+import LabeledInput from './LabeledInput';
 
 function OrganizationsSection() {
   const [organizations, setOrganizations] = useState<OrganizationType[]>([]);
@@ -117,23 +118,31 @@ function OrganizationsSection() {
   return (
     <section className=''>
       <div className='mx-auto px-[0px] lg:px-[5px]'>
-      <div className='flex items-center justify-between mx-2 md:mx-4'>
+      <div className='flex items-center mx-2 md:mx-4'>
         <h2 className='h2 section-title'>Organizations</h2>
-        <button className='btn btn-primary btn-sm md:btn-md lg:btn-lg'>New Organization</button>
+        {/* <button className='btn btn-primary btn-sm md:btn-md lg:btn-lg'>New Organization</button> */}
       </div>
       <div className='form' onSubmit={onSubmit}>
-        <form className='w-full flex gap-x-2 p-5'>
-            <input required value={name} type='text' name="name" placeholder='Enter a name' className='text-input' onChange={handleNameChange} />
-            <input required value={acronym} type='text' name="acronym" placeholder='Enter an acronym' className='text-input' onChange={handleAcronymChange} />
-            <input required value={country} type='text' name="country" placeholder='Enter an country' className='text-input' onChange={handleCountryChange} />
-            <select required value={projectId} id="organizationId" className='select-input' onChange={handleProjectIdChange}>
-              {projects?.map((item) => {
-                return (
-                <option key={item.id} value={item.id}>{item.name} (ID: {item.id})</option>
-                )
-              })}
-            </select>
-            <button type='submit' className='btn btn-sm md:btn-md lg:btn-lg btn-primary' disabled={!validate()}>submit</button>
+        <form className='section-form'>
+            <LabeledInput labelText='Name'>
+              <input required value={name} type='text' name="name" placeholder='Exus' className='text-input' onChange={handleNameChange} />
+            </LabeledInput>
+            <LabeledInput labelText='Acronym'>
+              <input required value={acronym} type='text' name="acronym" placeholder='EXU' className='text-input' onChange={handleAcronymChange} />
+            </LabeledInput>
+            <LabeledInput labelText='Country'>
+              <input required value={country} type='text' name="country" placeholder='Lithuania' className='text-input' onChange={handleCountryChange} />
+            </LabeledInput>
+            <LabeledInput labelText='Project'>
+              <select required value={projectId} id="organizationId" className='select-input' onChange={handleProjectIdChange}>
+                {projects?.map((item) => {
+                  return (
+                  <option key={item.id} value={item.id}>{item.name} (ID: {item.id})</option>
+                  )
+                })}
+              </select>
+            </LabeledInput>
+            <button type='submit' className='btn btn-primary btn-lg self-end' disabled={!validate()}>create Organization</button>
         </form>
       </div>
       {organizations.length && <OrganizationsTable head={['ID', 'Name', 'Acronym', 'Country','Project ID']} body={organizations} handleDeleteOrganization={onDeleteOrganization} handleEditOrganization={onEditOrganization} projects={projects} handleEditFormOrganization={onEditOrganization}/> }
