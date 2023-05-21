@@ -87,7 +87,6 @@ function ProjectsSection() {
     Project.getProjects()
     .then((data) => {
       setProjects(data);
-      console.log(data)
     })
     .catch((err) => {
       console.log(err)

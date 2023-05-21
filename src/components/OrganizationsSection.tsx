@@ -98,7 +98,6 @@ function OrganizationsSection() {
     Organization.getOrganizations()
     .then((data) => {
       setOrganizations(data);
-      console.log(data)
     })
     .catch((err) => {
       console.log(err)

@@ -90,7 +90,6 @@ function UsersSection() {
     User.getUsers()
     .then((data) => {
       setUsers(data);
-      console.log(data)
     })
     .catch((err) => {
       console.log(err)
