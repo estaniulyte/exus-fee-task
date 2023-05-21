@@ -57,7 +57,7 @@
     @apply text-red-500 hover:text-red-500/80
   }
   .btn-lg {
-    @apply font-bold uppercase text-[14px] leading-[18px] h-[44px] px-[38px] tracking-[1px];
+    @apply font-bold uppercase text-[14px] leading-[18px] h-[48px] px-[38px] tracking-[1px];
   }
   .btn-primary {
     @apply bg-primary-200 text-neutral-100 hover:bg-primary-200/90 transition rounded hover:disabled:bg-gray-500;
@@ -81,11 +81,20 @@
   .section-title {
     @apply flex -space-x-4;
   }
+  .section-form {
+    @apply w-full grid lg:flex gap-5 md:gap-x-2 p-5;
+  }
+  .section-table {
+    @apply w-full md:table-fixed border-collapse bg-white text-left text-sm text-gray-500;
+  }
 
   .text-input {
     @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
   }
   .select-input {
     @apply block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+  }
+  .input-label {
+    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
   }
 }
