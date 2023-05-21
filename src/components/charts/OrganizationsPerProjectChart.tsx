@@ -1,7 +1,7 @@
 import { ProjectType } from '../../models/project.interface';
 import { OrganizationType } from '../../models/organization.interface';
 
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 type ChartProps = {
   organizations: OrganizationType[];

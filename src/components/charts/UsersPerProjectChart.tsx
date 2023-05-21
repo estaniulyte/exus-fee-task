@@ -2,7 +2,7 @@ import { ProjectType } from '../../models/project.interface';
 import { UserType } from '../../models/user.interface';
 import { OrganizationType } from '../../models/organization.interface';
 
-import { PieChart, Pie, Sector, Tooltip, Cell, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Tooltip, Cell, ResponsiveContainer } from 'recharts';
 
 type ChartProps = {
   organizations: OrganizationType[];
