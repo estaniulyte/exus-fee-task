@@ -1,6 +1,14 @@
 # Task for Front-End Engineer position (Exus AI Labs)
 
-### Features
+## Technologies
+
+- React
+- Typescript
+- TailwindCSS
+- Docker Compose & Dokerfile
+- Axios
+
+## Features
 - Create/Delete/Edit Organizations, Projects, Users information
 - Data tables for:
   - Organizations
@@ -13,15 +21,20 @@
 - Mobile Friendly/Responsive User Interface
 - Dockerfile and docker-compose files included
 
-### To run project locally:
+## To run project locally:
 - Navigate to /front-end directory
 - run ```npm start```
 
 
-### To start container:
+## To start container:
 - In root directory run ```docker-compose up```
 
-### Showcase Screenshots
-<img width="1722" alt="Screenshot 2023-05-21 at 16 39 56" src="https://github.com/estaniulyte/exus-fee-task/assets/43463977/72c14543-748f-419e-abce-45d158c2a4a9">
-<img width="1722" alt="Screenshot 2023-05-21 at 16 40 31" src="https://github.com/estaniulyte/exus-fee-task/assets/43463977/36e292a2-420b-4edf-85ce-58e11a65a408">
-<img width="1714" alt="Screenshot 2023-05-21 at 16 42 19" src="https://github.com/estaniulyte/exus-fee-task/assets/43463977/c8abba83-a61c-4bfb-a6c9-404bcc7e7d7c">
+## Showcase Screenshots
+
+### Desktop
+
+![5d4d025c36ad50dbd7e274a5c6a5da34](https://github.com/estaniulyte/exus-fee-task/assets/43463977/17138674-d6d1-4c54-9dea-9623ccebebd2)
+
+### Mobile
+
+![85f1ad0d388fb8c8942ecdbc778d708b](https://github.com/estaniulyte/exus-fee-task/assets/43463977/91d2e6fc-dc94-4adb-8f7e-b98e14730b97)
