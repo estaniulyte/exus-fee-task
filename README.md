@@ -1,5 +1,7 @@
 # Task for Front-End Engineer position (Exus AI Labs)
 
+Web application which depicts information about organizations, the projects they participate and their users.
+
 ## Technologies
 
 - React
